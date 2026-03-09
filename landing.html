@@ -11,16 +11,17 @@
 
 :root {
   --ink: #0b0f1a;
-  --ink2: #111827;
+  --ink2: #0d1117;
   --surface: #0f1623;
   --surface2: #161e2e;
   --accent: #2563eb;
   --gold: #ffb547;
   --gold-light: #ffd080;
   --green: #22c55e;
-  --text: #e2e8f0;
-  --muted: #64748b;
-  --border: rgba(255,255,255,0.07);
+  --text: #f1f5f9;
+  --text2: #cbd5e1;
+  --muted: #94a3b8;
+  --border: rgba(255,255,255,0.08);
 }
 
 html { scroll-behavior: smooth; }
@@ -109,7 +110,7 @@ nav {
 
 .hero-sub {
   font-size: 1.1rem; line-height: 1.65;
-  color: var(--muted); max-width: 500px;
+  color: var(--text2); max-width: 500px;
   margin-bottom: 2.5rem;
   font-weight: 400;
 }
@@ -221,7 +222,7 @@ nav {
   margin-bottom: 1.5rem;
 }
 .problem-section h2 em { font-style: italic; color: var(--gold); }
-.problem-section p { font-size: 1rem; line-height: 1.7; color: var(--muted); margin-bottom: 1rem; }
+.problem-section p { font-size: 1rem; line-height: 1.7; color: var(--text2); margin-bottom: 1rem; }
 
 .pain-list { list-style: none; display: flex; flex-direction: column; gap: 1rem; }
 .pain-item {
@@ -231,7 +232,7 @@ nav {
 }
 .pain-icon { font-size: 1.2rem; flex-shrink: 0; margin-top: 0.1rem; }
 .pain-title { font-weight: 600; font-size: 0.9rem; margin-bottom: 0.2rem; color: var(--text); }
-.pain-desc { font-size: 0.82rem; color: var(--muted); line-height: 1.5; }
+.pain-desc { font-size: 0.82rem; color: var(--text2); line-height: 1.5; }
 
 /* ── FEATURES ──────────────────────────────────────────────── */
 .features-section {
@@ -246,7 +247,7 @@ nav {
   font-size: clamp(2rem, 3vw, 2.8rem);
   line-height: 1.2; color: var(--text); margin-bottom: 1rem;
 }
-.features-header p { color: var(--muted); font-size: 1rem; line-height: 1.65; }
+.features-header p { color: var(--text2); font-size: 1rem; line-height: 1.65; }
 
 .features-grid { display: grid; grid-template-columns: repeat(3,1fr); gap: 1.5rem; max-width: 1100px; margin: 0 auto; }
 .feature-card {
@@ -263,7 +264,7 @@ nav {
 }
 .feature-icon { font-size: 1.8rem; margin-bottom: 1rem; }
 .feature-title { font-family: 'Instrument Serif', serif; font-size: 1.2rem; color: var(--text); margin-bottom: 0.75rem; }
-.feature-desc { font-size: 0.85rem; color: var(--muted); line-height: 1.65; }
+.feature-desc { font-size: 0.85rem; color: var(--text2); line-height: 1.65; }
 
 /* ── COMPARISON ──────────────────────────────────────────────── */
 .comparison-section {
@@ -304,7 +305,7 @@ nav {
   font-size: clamp(2rem, 3vw, 2.6rem);
   color: var(--text); margin-bottom: 1rem;
 }
-.pricing-header p { color: var(--muted); line-height: 1.65; }
+.pricing-header p { color: var(--text2); line-height: 1.65; }
 
 .pricing-grid { display: grid; grid-template-columns: repeat(3,1fr); gap: 1.5rem; max-width: 960px; margin: 0 auto; }
 .pricing-card {
@@ -336,7 +337,7 @@ nav {
 .pricing-card.featured .pricing-period { color: rgba(255,255,255,0.6); }
 .pricing-features { list-style: none; display: flex; flex-direction: column; gap: 0.75rem; margin-bottom: 2rem; }
 .pricing-features li { display: flex; align-items: center; gap: 0.6rem; font-size: 0.85rem; }
-.pricing-card:not(.featured) .pricing-features li { color: var(--muted); }
+.pricing-card:not(.featured) .pricing-features li { color: var(--text2); }
 .pricing-card.featured .pricing-features li { color: rgba(255,255,255,0.85); }
 .pricing-features .pf-check { color: var(--green); font-size: 0.85rem; }
 .pricing-card.featured .pricing-features .pf-check { color: #86efac; }
