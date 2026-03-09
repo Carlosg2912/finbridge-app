@@ -294,6 +294,21 @@ nav {
 .cross { color: #f87171; font-size: 1rem; }
 .partial { color: var(--gold); font-size: 0.8rem; }
 
+.highlights-grid {
+  display: flex; flex-direction: column; gap: 1.25rem;
+  max-width: 750px; margin: 0 auto;
+}
+.highlight-item {
+  display: flex; align-items: flex-start; gap: 1.25rem;
+  background: var(--surface2); border: 1px solid var(--border);
+  border-radius: 12px; padding: 1.5rem;
+  transition: border-color 0.2s;
+}
+.highlight-item:hover { border-color: rgba(255,181,71,0.3); }
+.highlight-icon { font-size: 1.5rem; flex-shrink: 0; }
+.highlight-title { font-weight: 700; font-size: 1rem; color: var(--text); margin-bottom: 0.35rem; }
+.highlight-desc { font-size: 0.85rem; color: var(--text2); line-height: 1.6; }
+
 /* ── PRICING ──────────────────────────────────────────────── */
 .pricing-section {
   background: var(--surface2);
@@ -415,10 +430,9 @@ footer {
 
 /* ── ANIMATIONS ──────────────────────────────────────────────── */
 .fade-up {
-  opacity: 0; transform: translateY(24px);
-  transition: opacity 0.6s ease, transform 0.6s ease;
+  opacity: 1;
+  transform: none;
 }
-.fade-up.visible { opacity: 1; transform: translateY(0); }
 
 @media (max-width: 900px) {
   nav { padding: 1rem 1.5rem; }
@@ -506,7 +520,7 @@ footer {
     <div class="section-eyebrow">01 — Le problème</div>
     <h2>Excel pour la donnée,<br>PowerPoint pour la présentation,<br><em>zéro temps pour l'analyse.</em></h2>
     <p>Les équipes finance passent 70% de leur temps à construire des tableaux et formater des slides. Et seulement 30% consacré à ce qui compte vraiment : l'analyse et la prise de décision.</p>
-    <p>Les outils qu'on trouve sur le marché coûtent en moyenne 50 000€/an et nécessitent 6 mois d'implémentation. Hors de portée pour une PME ou ETI.</p>
+    <p>Les outils qu'on trouve sur le marché coûtent en moyenne 50 000€/an et nécessitent 6 mois d'implémentation — hors de portée pour une PME ou ETI.</p>
   </div>
   <ul class="pain-list fade-up">
     <li class="pain-item">
@@ -580,57 +594,46 @@ footer {
   </div>
 </section>
 
-<!-- COMPARISON -->
+<!-- HIGHLIGHTS -->
 <section class="comparison-section" id="comparaison">
-  <h2>FinBridge vs les alternatives</h2>
-  <table class="comp-table">
-    <thead>
-      <tr>
-        <th></th>
-        <th>Excel</th>
-        <th class="highlight">FinBridge</th>
-        <th>Anaplan / Pigment</th>
-      </tr>
-    </thead>
-    <tbody>
-      <tr>
-        <td>Prix mensuel</td>
-        <td>~15€</td>
-        <td class="highlight">199€</td>
-        <td>>4 000€</td>
-      </tr>
-      <tr>
-        <td>Bridge P&L automatique</td>
-        <td><span class="cross">✗</span></td>
-        <td class="highlight"><span class="check">✓</span></td>
-        <td><span class="check">✓</span></td>
-      </tr>
-      <tr>
-        <td>Analyse IA en langage naturel</td>
-        <td><span class="cross">✗</span></td>
-        <td class="highlight"><span class="check">✓</span></td>
-        <td><span class="cross">✗</span></td>
-      </tr>
-      <tr>
-        <td>Setup sans IT</td>
-        <td><span class="check">✓</span></td>
-        <td class="highlight"><span class="check">✓</span></td>
-        <td><span class="cross">✗</span></td>
-      </tr>
-      <tr>
-        <td>Délai de déploiement</td>
-        <td>Immédiat</td>
-        <td class="highlight">5 minutes</td>
-        <td>3 à 6 mois</td>
-      </tr>
-      <tr>
-        <td>Résumé exécutif automatique</td>
-        <td><span class="cross">✗</span></td>
-        <td class="highlight"><span class="check">✓</span></td>
-        <td><span class="partial">Partiel</span></td>
-      </tr>
-    </tbody>
-  </table>
+  <h2>Ce que FinBridge fait pour vous</h2>
+  <div class="highlights-grid">
+    <div class="highlight-item">
+      <div class="highlight-icon">⚡</div>
+      <div>
+        <div class="highlight-title">Bridge P&L automatique</div>
+        <div class="highlight-desc">Votre décomposition volume / prix / mix / coût générée en quelques secondes après import. Zéro formule, zéro effort.</div>
+      </div>
+    </div>
+    <div class="highlight-item">
+      <div class="highlight-icon">✦</div>
+      <div>
+        <div class="highlight-title">Analyse IA en langage naturel</div>
+        <div class="highlight-desc">Posez vos questions en français, obtenez des réponses chiffrées et contextualisées immédiatement.</div>
+      </div>
+    </div>
+    <div class="highlight-item">
+      <div class="highlight-icon">🔧</div>
+      <div>
+        <div class="highlight-title">Setup sans IT</div>
+        <div class="highlight-desc">Aucune intervention technique requise. Votre équipe finance est autonome dès le premier jour.</div>
+      </div>
+    </div>
+    <div class="highlight-item">
+      <div class="highlight-icon">⏱️</div>
+      <div>
+        <div class="highlight-title">Déploiement en 5 minutes</div>
+        <div class="highlight-desc">Créez votre compte, importez un CSV, analysez. Pas de 6 mois d'implémentation, pas de consultant.</div>
+      </div>
+    </div>
+    <div class="highlight-item">
+      <div class="highlight-icon">📋</div>
+      <div>
+        <div class="highlight-title">Résumé exécutif automatique</div>
+        <div class="highlight-desc">FinBridge rédige le commentaire de gestion à votre place. Vous relisez, vous validez, vous envoyez.</div>
+      </div>
+    </div>
+  </div>
 </section>
 
 <!-- PRICING -->
@@ -656,7 +659,7 @@ footer {
     <div class="pricing-card featured fade-up">
       <div class="pricing-badge">LE PLUS POPULAIRE</div>
       <div class="pricing-plan">Business</div>
-      <div class="pricing-price">199€</div>
+      <div class="pricing-price">399€</div>
       <div class="pricing-period">/ mois · sans engagement</div>
       <ul class="pricing-features">
         <li><span class="pf-check">✓</span> Datasets illimités</li>
@@ -689,7 +692,6 @@ footer {
   <h2>Prêt à passer moins de temps<br>sur les rapports, <em>plus à décider ?</em></h2>
   <p>14 jours gratuits. Aucune carte bancaire. Setup en 5 minutes.</p>
   <a href="https://carlosg2912.github.io/finbridge-app" class="btn-primary">Démarrer l'essai gratuit →</a>
-  <div class="cta-proof">Plus de 50 équipes finance testent FinBridge ce mois-ci</div>
 </section>
 
 <!-- FOOTER -->
@@ -704,9 +706,6 @@ footer {
   <div class="footer-copy">© 2026 FinBridge. Tous droits réservés.</div>
 </footer>
 
-<script data-cfasync="false" src="/cdn-cgi/scripts/5c5dd728/cloudflare-static/email-decode.min.js"></script><script>
-// Scroll animations
-const observer = new IntersectionObserver((entries) => {
-  entries.forEach((entry, i) => {
-    if (entry.isIntersecting) {
-      setTimeou
+<script>
+// animations désactivées
+</script>
