@@ -1,0 +1,711 @@
+<!DOCTYPE html>
+<html lang="fr">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>FinBridge — FP&A Intelligence pour PME & ETI</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link href="https://fonts.googleapis.com/css2?family=Instrument+Serif:ital@0;1&family=DM+Sans:wght@300;400;500;600&family=DM+Mono:wght@400;500&display=swap" rel="stylesheet">
+<style>
+*, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
+
+:root {
+  --ink: #0b0f1a;
+  --ink2: #111827;
+  --surface: #0f1623;
+  --surface2: #161e2e;
+  --accent: #2563eb;
+  --gold: #ffb547;
+  --gold-light: #ffd080;
+  --green: #22c55e;
+  --text: #e2e8f0;
+  --muted: #64748b;
+  --border: rgba(255,255,255,0.07);
+}
+
+html { scroll-behavior: smooth; }
+
+body {
+  font-family: 'DM Sans', sans-serif;
+  background: var(--surface);
+  color: var(--text);
+  overflow-x: hidden;
+}
+
+/* ── NAV ──────────────────────────────────────────────── */
+nav {
+  position: fixed; top: 0; left: 0; right: 0; z-index: 100;
+  padding: 1.25rem 3rem;
+  display: flex; align-items: center; justify-content: space-between;
+  background: rgba(15,22,35,0.92);
+  backdrop-filter: blur(12px);
+  border-bottom: 1px solid var(--border);
+}
+.nav-logo {
+  font-family: 'Instrument Serif', serif;
+  font-size: 1.5rem; color: var(--text);
+  display: flex; align-items: center; gap: 0.5rem;
+}
+.nav-logo span { color: var(--gold); }
+.nav-links { display: flex; align-items: center; gap: 2.5rem; }
+.nav-links a {
+  font-size: 0.88rem; font-weight: 500; color: var(--muted);
+  text-decoration: none; transition: color 0.2s;
+  letter-spacing: 0.01em;
+}
+.nav-links a:hover { color: var(--text); }
+.nav-cta {
+  background: var(--accent); color: white !important;
+  padding: 0.6rem 1.4rem; border-radius: 6px;
+  font-weight: 600 !important; font-size: 0.85rem !important;
+  transition: background 0.2s !important;
+}
+.nav-cta:hover { background: #1d4ed8 !important; color: white !important; }
+
+/* ── HERO ──────────────────────────────────────────────── */
+.hero {
+  min-height: 100vh;
+  display: grid; grid-template-columns: 1fr 1fr;
+  align-items: center;
+  padding: 8rem 3rem 5rem;
+  gap: 4rem;
+  position: relative;
+  overflow: hidden;
+}
+
+.hero::before {
+  content: '';
+  position: absolute; top: -200px; right: -200px;
+  width: 700px; height: 700px;
+  background: radial-gradient(circle, rgba(200,148,42,0.12) 0%, transparent 70%);
+  pointer-events: none;
+}
+
+.hero-eyebrow {
+  display: inline-flex; align-items: center; gap: 0.5rem;
+  font-family: 'DM Mono', monospace;
+  font-size: 0.72rem; font-weight: 500;
+  color: var(--gold);
+  letter-spacing: 0.12em; text-transform: uppercase;
+  margin-bottom: 1.75rem;
+  padding: 0.35rem 0.75rem;
+  background: rgba(200,148,42,0.1);
+  border: 1px solid rgba(200,148,42,0.2);
+  border-radius: 4px;
+}
+
+.hero h1 {
+  font-family: 'Instrument Serif', serif;
+  font-size: clamp(2.8rem, 4.5vw, 4.2rem);
+  line-height: 1.12;
+  color: var(--text);
+  margin-bottom: 1.75rem;
+  letter-spacing: -0.02em;
+}
+.hero h1 em {
+  font-style: italic;
+  color: var(--gold);
+}
+
+.hero-sub {
+  font-size: 1.1rem; line-height: 1.65;
+  color: var(--muted); max-width: 500px;
+  margin-bottom: 2.5rem;
+  font-weight: 400;
+}
+
+.hero-actions { display: flex; align-items: center; gap: 1rem; flex-wrap: wrap; }
+
+.btn-primary {
+  display: inline-flex; align-items: center; gap: 0.5rem;
+  background: var(--accent); color: white;
+  padding: 0.9rem 2rem; border-radius: 8px;
+  font-size: 0.95rem; font-weight: 600;
+  text-decoration: none; transition: all 0.2s;
+  letter-spacing: 0.01em;
+}
+.btn-primary:hover { background: #1d4ed8; transform: translateY(-1px); box-shadow: 0 8px 24px rgba(37,99,235,0.3); }
+
+.btn-secondary {
+  display: inline-flex; align-items: center; gap: 0.5rem;
+  color: var(--text); font-size: 0.9rem; font-weight: 500;
+  text-decoration: none; padding: 0.9rem 1.5rem;
+  border: 1px solid var(--border); border-radius: 8px;
+  transition: all 0.2s;
+}
+.btn-secondary:hover { border-color: rgba(255,255,255,0.2); background: var(--surface2); }
+
+.hero-proof {
+  margin-top: 2.5rem;
+  display: flex; align-items: center; gap: 1.5rem;
+  font-size: 0.8rem; color: var(--muted);
+}
+.hero-proof-dot { width: 6px; height: 6px; border-radius: 50%; background: var(--green); }
+
+/* HERO VISUAL */
+.hero-visual {
+  position: relative;
+}
+.hero-card {
+  background: var(--ink2);
+  border-radius: 16px;
+  padding: 1.75rem;
+  border: 1px solid rgba(255,255,255,0.06);
+  box-shadow: 0 40px 80px rgba(0,0,0,0.25), 0 0 0 1px rgba(255,255,255,0.03);
+  position: relative;
+}
+.card-topbar {
+  display: flex; align-items: center; justify-content: space-between;
+  margin-bottom: 1.5rem;
+}
+.card-topbar-title { font-family: 'DM Mono', monospace; font-size: 0.72rem; color: rgba(255,255,255,0.4); letter-spacing: 0.08em; }
+.card-badge-live { display: flex; align-items: center; gap: 0.35rem; font-size: 0.7rem; color: #4ade80; }
+.live-dot { width: 6px; height: 6px; border-radius: 50%; background: #4ade80; animation: pulse 2s infinite; }
+@keyframes pulse { 0%,100%{opacity:1} 50%{opacity:0.3} }
+
+.kpi-row { display: grid; grid-template-columns: repeat(3,1fr); gap: 0.75rem; margin-bottom: 1.5rem; }
+.kpi-box { background: rgba(255,255,255,0.04); border: 1px solid rgba(255,255,255,0.06); border-radius: 10px; padding: 1rem; }
+.kpi-lbl { font-size: 0.65rem; color: rgba(255,255,255,0.35); text-transform: uppercase; letter-spacing: 0.08em; margin-bottom: 0.5rem; }
+.kpi-val { font-family: 'DM Mono', monospace; font-size: 1.3rem; font-weight: 500; color: white; }
+.kpi-delta { font-size: 0.68rem; margin-top: 0.25rem; }
+.kpi-delta.up { color: #4ade80; }
+.kpi-delta.down { color: #f87171; }
+
+.bridge-label { font-size: 0.65rem; color: rgba(255,255,255,0.35); text-transform: uppercase; letter-spacing: 0.08em; margin-bottom: 0.75rem; }
+.bridge-bars { display: flex; gap: 0.5rem; align-items: flex-end; height: 80px; }
+.b-bar { border-radius: 4px 4px 0 0; flex: 1; position: relative; }
+.b-bar::after { content: attr(data-label); position: absolute; bottom: -1.4rem; left: 50%; transform: translateX(-50%); font-size: 0.55rem; color: rgba(255,255,255,0.3); white-space: nowrap; }
+.b-bar.start { background: #3b82f6; height: 65%; }
+.b-bar.vol { background: #4ade80; height: 20%; }
+.b-bar.prix { background: #4ade80; height: 12%; }
+.b-bar.mix { background: #f87171; height: 8%; }
+.b-bar.end { background: #3b82f6; height: 72%; }
+
+.ai-bubble {
+  position: absolute; bottom: -1.5rem; right: -1.5rem;
+  background: white; border-radius: 12px;
+  padding: 1rem 1.25rem;
+  box-shadow: 0 8px 32px rgba(0,0,0,0.12);
+  max-width: 220px;
+  border: 1px solid var(--border);
+}
+.ai-bubble-header { display: flex; align-items: center; gap: 0.4rem; margin-bottom: 0.4rem; font-size: 0.68rem; font-weight: 600; color: var(--gold); }
+.ai-bubble p { font-size: 0.75rem; line-height: 1.5; color: var(--text); }
+
+/* ── LOGOS ──────────────────────────────────────────────── */
+.logos-section {
+  padding: 3rem; border-top: 1px solid var(--border);
+  background: white;
+}
+.logos-label { text-align: center; font-size: 0.78rem; color: var(--muted); letter-spacing: 0.08em; text-transform: uppercase; margin-bottom: 2rem; }
+.logos-row { display: flex; align-items: center; justify-content: center; gap: 3.5rem; flex-wrap: wrap; }
+.logo-item { font-family: 'Instrument Serif', serif; font-size: 1.2rem; color: rgba(0,0,0,0.18); letter-spacing: -0.01em; }
+
+/* ── PROBLEM ──────────────────────────────────────────────── */
+.problem-section {
+  padding: 7rem 3rem;
+  display: grid; grid-template-columns: 1fr 1fr; gap: 5rem;
+  align-items: center;
+  max-width: 1200px; margin: 0 auto;
+}
+.section-eyebrow {
+  font-family: 'DM Mono', monospace;
+  font-size: 0.7rem; color: var(--muted);
+  letter-spacing: 0.12em; text-transform: uppercase;
+  margin-bottom: 1.25rem;
+}
+.problem-section h2 {
+  font-family: 'Instrument Serif', serif;
+  font-size: clamp(2rem, 3vw, 2.8rem);
+  line-height: 1.2; color: var(--text);
+  margin-bottom: 1.5rem;
+}
+.problem-section h2 em { font-style: italic; color: var(--gold); }
+.problem-section p { font-size: 1rem; line-height: 1.7; color: var(--muted); margin-bottom: 1rem; }
+
+.pain-list { list-style: none; display: flex; flex-direction: column; gap: 1rem; }
+.pain-item {
+  display: flex; align-items: flex-start; gap: 1rem;
+  background: var(--surface2); border: 1px solid var(--border);
+  border-radius: 10px; padding: 1.25rem;
+}
+.pain-icon { font-size: 1.2rem; flex-shrink: 0; margin-top: 0.1rem; }
+.pain-title { font-weight: 600; font-size: 0.9rem; margin-bottom: 0.2rem; color: var(--text); }
+.pain-desc { font-size: 0.82rem; color: var(--muted); line-height: 1.5; }
+
+/* ── FEATURES ──────────────────────────────────────────────── */
+.features-section {
+  background: var(--surface2);
+  padding: 7rem 3rem;
+  color: var(--text);
+}
+.features-header { text-align: center; max-width: 620px; margin: 0 auto 4rem; }
+.features-header .section-eyebrow { color: var(--muted); }
+.features-header h2 {
+  font-family: 'Instrument Serif', serif;
+  font-size: clamp(2rem, 3vw, 2.8rem);
+  line-height: 1.2; color: var(--text); margin-bottom: 1rem;
+}
+.features-header p { color: var(--muted); font-size: 1rem; line-height: 1.65; }
+
+.features-grid { display: grid; grid-template-columns: repeat(3,1fr); gap: 1.5rem; max-width: 1100px; margin: 0 auto; }
+.feature-card {
+  background: var(--surface);
+  border: 1px solid var(--border);
+  border-radius: 12px; padding: 2rem;
+  transition: border-color 0.2s;
+}
+.feature-card:hover { border-color: rgba(255,181,71,0.3); }
+.feature-number {
+  font-family: 'DM Mono', monospace;
+  font-size: 0.65rem; color: var(--gold);
+  letter-spacing: 0.1em; margin-bottom: 1.25rem;
+}
+.feature-icon { font-size: 1.8rem; margin-bottom: 1rem; }
+.feature-title { font-family: 'Instrument Serif', serif; font-size: 1.2rem; color: var(--text); margin-bottom: 0.75rem; }
+.feature-desc { font-size: 0.85rem; color: var(--muted); line-height: 1.65; }
+
+/* ── COMPARISON ──────────────────────────────────────────────── */
+.comparison-section {
+  padding: 7rem 3rem;
+  max-width: 900px; margin: 0 auto;
+}
+.comparison-section h2 {
+  font-family: 'Instrument Serif', serif;
+  font-size: clamp(2rem, 3vw, 2.6rem);
+  line-height: 1.2; color: var(--text);
+  margin-bottom: 3rem; text-align: center;
+}
+.comp-table { width: 100%; border-collapse: collapse; }
+.comp-table th {
+  padding: 1rem 1.5rem; font-size: 0.8rem;
+  font-weight: 600; letter-spacing: 0.04em;
+  text-align: left; border-bottom: 2px solid var(--border); color: var(--text);
+}
+.comp-table th.highlight { background: var(--accent); color: white; border-radius: 8px 8px 0 0; text-align: center; }
+.comp-table td {
+  padding: 1rem 1.5rem; font-size: 0.88rem;
+  border-bottom: 1px solid var(--border); color: var(--muted);
+}
+.comp-table td.highlight { background: rgba(37,99,235,0.08); text-align: center; color: var(--text); font-weight: 600; }
+.comp-table td:first-child { color: var(--text); font-weight: 500; }
+.check { color: #22c55e; font-size: 1rem; }
+.cross { color: #f87171; font-size: 1rem; }
+.partial { color: var(--gold); font-size: 0.8rem; }
+
+/* ── PRICING ──────────────────────────────────────────────── */
+.pricing-section {
+  background: var(--surface2);
+  padding: 7rem 3rem;
+}
+.pricing-header { text-align: center; max-width: 560px; margin: 0 auto 4rem; }
+.pricing-header h2 {
+  font-family: 'Instrument Serif', serif;
+  font-size: clamp(2rem, 3vw, 2.6rem);
+  color: var(--text); margin-bottom: 1rem;
+}
+.pricing-header p { color: var(--muted); line-height: 1.65; }
+
+.pricing-grid { display: grid; grid-template-columns: repeat(3,1fr); gap: 1.5rem; max-width: 960px; margin: 0 auto; }
+.pricing-card {
+  background: var(--surface); border: 1px solid var(--border);
+  border-radius: 14px; padding: 2.5rem;
+  position: relative;
+}
+.pricing-card.featured {
+  background: var(--accent); border-color: transparent;
+  box-shadow: 0 20px 60px rgba(37,99,235,0.3);
+}
+.pricing-badge {
+  position: absolute; top: -0.75rem; left: 50%; transform: translateX(-50%);
+  background: var(--gold); color: white;
+  font-size: 0.68rem; font-weight: 700; letter-spacing: 0.06em;
+  padding: 0.3rem 0.9rem; border-radius: 20px;
+  white-space: nowrap;
+}
+.pricing-plan { font-size: 0.75rem; font-weight: 600; letter-spacing: 0.08em; text-transform: uppercase; margin-bottom: 1rem; }
+.pricing-card.featured .pricing-plan { color: rgba(255,255,255,0.7); }
+.pricing-card:not(.featured) .pricing-plan { color: var(--muted); }
+.pricing-price {
+  font-family: 'Instrument Serif', serif;
+  font-size: 2.8rem; color: var(--text);
+  margin-bottom: 0.25rem; line-height: 1;
+}
+.pricing-card.featured .pricing-price { color: white; }
+.pricing-period { font-size: 0.8rem; color: var(--muted); margin-bottom: 2rem; }
+.pricing-card.featured .pricing-period { color: rgba(255,255,255,0.6); }
+.pricing-features { list-style: none; display: flex; flex-direction: column; gap: 0.75rem; margin-bottom: 2rem; }
+.pricing-features li { display: flex; align-items: center; gap: 0.6rem; font-size: 0.85rem; }
+.pricing-card:not(.featured) .pricing-features li { color: var(--muted); }
+.pricing-card.featured .pricing-features li { color: rgba(255,255,255,0.85); }
+.pricing-features .pf-check { color: var(--green); font-size: 0.85rem; }
+.pricing-card.featured .pricing-features .pf-check { color: #86efac; }
+.pricing-btn {
+  display: block; width: 100%; padding: 0.85rem;
+  border-radius: 8px; font-size: 0.88rem; font-weight: 600;
+  text-align: center; text-decoration: none; cursor: pointer;
+  border: none; transition: all 0.2s;
+}
+.pricing-card:not(.featured) .pricing-btn {
+  background: var(--surface2); color: var(--text);
+}
+.pricing-card:not(.featured) .pricing-btn:hover { background: rgba(255,255,255,0.05); }
+.pricing-card.featured .pricing-btn {
+  background: white; color: var(--accent);
+}
+.pricing-card.featured .pricing-btn:hover { background: rgba(255,255,255,0.9); }
+
+/* ── TESTIMONIAL ──────────────────────────────────────────────── */
+.testimonial-section {
+  padding: 7rem 3rem;
+  max-width: 800px; margin: 0 auto; text-align: center;
+}
+.testimonial-quote {
+  font-family: 'Instrument Serif', serif;
+  font-size: clamp(1.5rem, 2.5vw, 2.2rem);
+  line-height: 1.4; color: var(--ink);
+  font-style: italic; margin-bottom: 2rem;
+}
+.testimonial-author { font-size: 0.85rem; color: var(--muted); }
+.testimonial-author strong { color: var(--ink); display: block; margin-bottom: 0.2rem; }
+
+/* ── CTA FINALE ──────────────────────────────────────────────── */
+.cta-section {
+  background: var(--ink);
+  padding: 7rem 3rem; text-align: center;
+  position: relative; overflow: hidden;
+}
+.cta-section::before {
+  content: '';
+  position: absolute; top: -200px; left: 50%; transform: translateX(-50%);
+  width: 600px; height: 600px;
+  background: radial-gradient(circle, rgba(200,148,42,0.15) 0%, transparent 70%);
+  pointer-events: none;
+}
+.cta-section h2 {
+  font-family: 'Instrument Serif', serif;
+  font-size: clamp(2.2rem, 4vw, 3.5rem);
+  color: white; margin-bottom: 1.25rem; line-height: 1.15;
+  position: relative;
+}
+.cta-section h2 em { font-style: italic; color: var(--gold-light); }
+.cta-section p { color: rgba(255,255,255,0.5); font-size: 1rem; margin-bottom: 2.5rem; position: relative; }
+.cta-section .btn-primary {
+  background: var(--gold); font-size: 1rem; padding: 1rem 2.5rem;
+  position: relative;
+}
+.cta-section .btn-primary:hover { background: #b8831e; }
+.cta-proof { margin-top: 1.5rem; font-size: 0.78rem; color: rgba(255,255,255,0.3); position: relative; }
+
+/* ── FOOTER ──────────────────────────────────────────────── */
+footer {
+  background: var(--ink2);
+  padding: 2.5rem 3rem;
+  display: flex; align-items: center; justify-content: space-between;
+  flex-wrap: wrap; gap: 1rem;
+  border-top: 1px solid var(--border);
+}
+.footer-logo { font-family: 'Instrument Serif', serif; font-size: 1.2rem; color: white; }
+.footer-logo span { color: var(--gold); }
+.footer-links { display: flex; gap: 2rem; }
+.footer-links a { font-size: 0.78rem; color: rgba(255,255,255,0.35); text-decoration: none; transition: color 0.2s; }
+.footer-links a:hover { color: white; }
+.footer-copy { font-size: 0.75rem; color: rgba(255,255,255,0.25); }
+
+/* ── ANIMATIONS ──────────────────────────────────────────────── */
+.fade-up {
+  opacity: 0; transform: translateY(24px);
+  transition: opacity 0.6s ease, transform 0.6s ease;
+}
+.fade-up.visible { opacity: 1; transform: translateY(0); }
+
+@media (max-width: 900px) {
+  nav { padding: 1rem 1.5rem; }
+  .nav-links { display: none; }
+  .hero { grid-template-columns: 1fr; padding: 6rem 1.5rem 3rem; }
+  .hero-visual { display: none; }
+  .problem-section { grid-template-columns: 1fr; padding: 4rem 1.5rem; }
+  .features-grid { grid-template-columns: 1fr; }
+  .pricing-grid { grid-template-columns: 1fr; }
+  .comparison-section { padding: 4rem 1.5rem; overflow-x: auto; }
+}
+</style>
+</head>
+<body>
+
+<!-- NAV -->
+<nav>
+  <div class="nav-logo">Fin<span>Bridge</span></div>
+  <div class="nav-links">
+    <a href="#features">Fonctionnalités</a>
+    <a href="#pricing">Tarifs</a>
+    <a href="#comparaison">Comparaison</a>
+    <a href="https://carlosg2912.github.io/finbridge-app" class="nav-cta">Essai gratuit →</a>
+  </div>
+</nav>
+
+<!-- HERO -->
+<section class="hero">
+  <div class="hero-content">
+    <div class="hero-eyebrow">✦ FP&A Intelligence · Nouvelle génération</div>
+    <h1>Moins de temps sur les rapports,<br><em>plus pour créer de la valeur.</em></h1>
+    <p class="hero-sub">FinBridge analyse vos données financières en quelques secondes, et génère vos bridges P&L, pour répondre aux variations et questions. Pour les CFO jusqu'aux analystes.</p>
+    <div class="hero-actions">
+      <a href="https://carlosg2912.github.io/finbridge-app" class="btn-primary">Démarrer l'essai gratuit 14 jours →</a>
+      <a href="#features" class="btn-secondary">Voir la démo</a>
+    </div>
+    <div class="hero-proof">
+      <div class="hero-proof-dot"></div>
+      Aucune carte bancaire requise · Données sécurisées · Setup en 5 minutes
+    </div>
+  </div>
+
+  <div class="hero-visual">
+    <div class="hero-card">
+      <div class="card-topbar">
+        <span class="card-topbar-title">BRIDGE P&L · YTD 2026</span>
+        <span class="card-badge-live"><span class="live-dot"></span> En direct</span>
+      </div>
+      <div class="kpi-row">
+        <div class="kpi-box">
+          <div class="kpi-lbl">CA</div>
+          <div class="kpi-val">4,2M€</div>
+          <div class="kpi-delta up">↑ +12,4%</div>
+        </div>
+        <div class="kpi-box">
+          <div class="kpi-lbl">Marge brute</div>
+          <div class="kpi-val">38,2%</div>
+          <div class="kpi-delta up">↑ +2,1pts</div>
+        </div>
+        <div class="kpi-box">
+          <div class="kpi-lbl">Effet mix</div>
+          <div class="kpi-val">+84k€</div>
+          <div class="kpi-delta down">↓ Coûts</div>
+        </div>
+      </div>
+      <div class="bridge-label">Bridge Marge Brute</div>
+      <div class="bridge-bars">
+        <div class="b-bar start" data-label="N-1"></div>
+        <div class="b-bar vol" data-label="Volume"></div>
+        <div class="b-bar prix" data-label="Prix"></div>
+        <div class="b-bar mix" data-label="Mix"></div>
+        <div class="b-bar end" data-label="N"></div>
+      </div>
+    </div>
+    <div class="ai-bubble">
+      <div class="ai-bubble-header">✦ Analyse IA</div>
+      <p>Le segment Premium génère +3,2pts de marge vs N-1. Recommandation : renforcer les actions commerciales sur ce segment.</p>
+    </div>
+  </div>
+</section>
+
+<!-- PROBLEM -->
+<section class="problem-section">
+  <div class="fade-up">
+    <div class="section-eyebrow">01 — Le problème</div>
+    <h2>Excel pour la donnée,<br>PowerPoint pour la présentation,<br><em>zéro temps pour l'analyse.</em></h2>
+    <p>Les équipes finance passent 70% de leur temps à construire des tableaux et formater des slides. Et seulement 30% consacré à ce qui compte vraiment : l'analyse et la prise de décision.</p>
+    <p>Les outils qu'on trouve sur le marché coûtent en moyenne 50 000€/an et nécessitent 6 mois d'implémentation. Hors de portée pour une PME ou ETI.</p>
+  </div>
+  <ul class="pain-list fade-up">
+    <li class="pain-item">
+      <div class="pain-icon">📊</div>
+      <div>
+        <div class="pain-title">Excel qui plante au mauvais moment</div>
+        <div class="pain-desc">Fichiers de 50Mo, formules cassées, versions multiples qui circulent par email. Chaque clôture est un stress.</div>
+      </div>
+    </li>
+    <li class="pain-item">
+      <div class="pain-icon">⏱️</div>
+      <div>
+        <div class="pain-title">3 semaines pour produire un bridge</div>
+        <div class="pain-desc">Réconciliation manuelle, retraitements, mise en forme. Le rapport sort quand les décisions sont déjà prises.</div>
+      </div>
+    </li>
+    <li class="pain-item">
+      <div class="pain-icon">❓</div>
+      <div>
+        <div class="pain-title">"Pourquoi cette variance ?" sans réponse rapide</div>
+        <div class="pain-desc">Le COMEX pose une question en réunion. Retrouver l'explication dans les données prend des heures.</div>
+      </div>
+    </li>
+  </ul>
+</section>
+
+<!-- FEATURES -->
+<section class="features-section" id="features">
+  <div class="features-header fade-up">
+    <div class="section-eyebrow">02 — La solution</div>
+    <h2>Vos données financières, enfin intelligentes.</h2>
+    <p>Importez vos données, FinBridge génère automatiquement votre analyse complète. En quelques secondes, pas en quelques semaines.</p>
+  </div>
+  <div class="features-grid">
+    <div class="feature-card fade-up">
+      <div class="feature-number">01</div>
+      <div class="feature-icon">⚡</div>
+      <div class="feature-title">Bridge P&L en 30 secondes</div>
+      <div class="feature-desc">Importez un CSV. FinBridge décompose automatiquement la variation de marge en effets volume, prix, mix et coût. Sans formule, sans effort.</div>
+    </div>
+    <div class="feature-card fade-up">
+      <div class="feature-number">02</div>
+      <div class="feature-icon">✦</div>
+      <div class="feature-title">IA qui répond à vos questions</div>
+      <div class="feature-desc">"Quel segment pèse sur la marge ?" — posez la question en français, obtenez une réponse chiffrée et contextualisée en 3 secondes.</div>
+    </div>
+    <div class="feature-card fade-up">
+      <div class="feature-number">03</div>
+      <div class="feature-icon">◫</div>
+      <div class="feature-title">Analyse de mix automatique</div>
+      <div class="feature-desc">Visualisez l'impact de chaque segment sur votre marge globale. Identifiez les moteurs et les freins en un coup d'œil.</div>
+    </div>
+    <div class="feature-card fade-up">
+      <div class="feature-number">04</div>
+      <div class="feature-icon">📋</div>
+      <div class="feature-title">Résumé exécutif généré</div>
+      <div class="feature-desc">FinBridge rédige le commentaire de gestion à votre place. Vous le relisez et le validez. Votre COMEX aura sa synthèse avant la réunion.</div>
+    </div>
+    <div class="feature-card fade-up">
+      <div class="feature-number">05</div>
+      <div class="feature-icon">🎯</div>
+      <div class="feature-title">Scénarios en temps réel</div>
+      <div class="feature-desc">Testez 3 hypothèses automatiques : hausse de prix, amélioration du mix, variation des coûts. Mesurez l'impact chiffré immédiatement.</div>
+    </div>
+    <div class="feature-card fade-up">
+      <div class="feature-number">06</div>
+      <div class="feature-icon">🔒</div>
+      <div class="feature-title">Données isolées et sécurisées</div>
+      <div class="feature-desc">Chaque entreprise accède uniquement à ses propres données. Hébergement européen, connexion sécurisée, aucun partage entre clients.</div>
+    </div>
+  </div>
+</section>
+
+<!-- COMPARISON -->
+<section class="comparison-section" id="comparaison">
+  <h2>FinBridge vs les alternatives</h2>
+  <table class="comp-table">
+    <thead>
+      <tr>
+        <th></th>
+        <th>Excel</th>
+        <th class="highlight">FinBridge</th>
+        <th>Anaplan / Pigment</th>
+      </tr>
+    </thead>
+    <tbody>
+      <tr>
+        <td>Prix mensuel</td>
+        <td>~15€</td>
+        <td class="highlight">199€</td>
+        <td>>4 000€</td>
+      </tr>
+      <tr>
+        <td>Bridge P&L automatique</td>
+        <td><span class="cross">✗</span></td>
+        <td class="highlight"><span class="check">✓</span></td>
+        <td><span class="check">✓</span></td>
+      </tr>
+      <tr>
+        <td>Analyse IA en langage naturel</td>
+        <td><span class="cross">✗</span></td>
+        <td class="highlight"><span class="check">✓</span></td>
+        <td><span class="cross">✗</span></td>
+      </tr>
+      <tr>
+        <td>Setup sans IT</td>
+        <td><span class="check">✓</span></td>
+        <td class="highlight"><span class="check">✓</span></td>
+        <td><span class="cross">✗</span></td>
+      </tr>
+      <tr>
+        <td>Délai de déploiement</td>
+        <td>Immédiat</td>
+        <td class="highlight">5 minutes</td>
+        <td>3 à 6 mois</td>
+      </tr>
+      <tr>
+        <td>Résumé exécutif automatique</td>
+        <td><span class="cross">✗</span></td>
+        <td class="highlight"><span class="check">✓</span></td>
+        <td><span class="partial">Partiel</span></td>
+      </tr>
+    </tbody>
+  </table>
+</section>
+
+<!-- PRICING -->
+<section class="pricing-section" id="pricing">
+  <div class="pricing-header fade-up">
+    <div class="section-eyebrow">03 — Tarifs</div>
+    <h2>Simple. Transparent. Sans surprise.</h2>
+    <p>Commencez gratuitement, passez au Pro quand vous êtes convaincu. Aucun engagement annuel imposé.</p>
+  </div>
+  <div class="pricing-grid">
+    <div class="pricing-card fade-up">
+      <div class="pricing-plan">Starter</div>
+      <div class="pricing-price">0€</div>
+      <div class="pricing-period">Gratuit · 14 jours d'essai complet</div>
+      <ul class="pricing-features">
+        <li><span class="pf-check">✓</span> 3 datasets</li>
+        <li><span class="pf-check">✓</span> Bridge P&L automatique</li>
+        <li><span class="pf-check">✓</span> 10 questions IA / mois</li>
+        <li><span class="pf-check">✓</span> Analyse de mix</li>
+      </ul>
+      <a href="https://carlosg2912.github.io/finbridge-app" class="pricing-btn">Démarrer gratuitement</a>
+    </div>
+    <div class="pricing-card featured fade-up">
+      <div class="pricing-badge">LE PLUS POPULAIRE</div>
+      <div class="pricing-plan">Business</div>
+      <div class="pricing-price">199€</div>
+      <div class="pricing-period">/ mois · sans engagement</div>
+      <ul class="pricing-features">
+        <li><span class="pf-check">✓</span> Datasets illimités</li>
+        <li><span class="pf-check">✓</span> IA illimitée</li>
+        <li><span class="pf-check">✓</span> Export PDF</li>
+        <li><span class="pf-check">✓</span> Résumé exécutif auto</li>
+        <li><span class="pf-check">✓</span> Scénarios what-if</li>
+        <li><span class="pf-check">✓</span> Support prioritaire</li>
+      </ul>
+      <a href="https://carlosg2912.github.io/finbridge-app" class="pricing-btn">Essayer 14 jours gratuits</a>
+    </div>
+    <div class="pricing-card fade-up">
+      <div class="pricing-plan">Enterprise</div>
+      <div class="pricing-price">Sur devis</div>
+      <div class="pricing-period">Multi-entités · intégrations sur mesure</div>
+      <ul class="pricing-features">
+        <li><span class="pf-check">✓</span> Tout Business inclus</li>
+        <li><span class="pf-check">✓</span> Multi-entités</li>
+        <li><span class="pf-check">✓</span> Intégration ERP</li>
+        <li><span class="pf-check">✓</span> Onboarding dédié</li>
+        <li><span class="pf-check">✓</span> SLA garanti</li>
+      </ul>
+      <a href="/cdn-cgi/l/email-protection#c1a2aeafb5a0a2b581a7a8afa3b3a8a5a6a4efa7b3" class="pricing-btn">Nous contacter</a>
+    </div>
+  </div>
+</section>
+
+<!-- CTA -->
+<section class="cta-section">
+  <h2>Prêt à passer moins de temps<br>sur les rapports, <em>plus à décider ?</em></h2>
+  <p>14 jours gratuits. Aucune carte bancaire. Setup en 5 minutes.</p>
+  <a href="https://carlosg2912.github.io/finbridge-app" class="btn-primary">Démarrer l'essai gratuit →</a>
+  <div class="cta-proof">Plus de 50 équipes finance testent FinBridge ce mois-ci</div>
+</section>
+
+<!-- FOOTER -->
+<footer>
+  <div class="footer-logo">Fin<span>Bridge</span></div>
+  <div class="footer-links">
+    <a href="#features">Fonctionnalités</a>
+    <a href="#pricing">Tarifs</a>
+    <a href="/cdn-cgi/l/email-protection#781b17160c191b0c381e11161a0a111c1f1d561e0a">Contact</a>
+    <a href="#">Mentions légales</a>
+  </div>
+  <div class="footer-copy">© 2026 FinBridge. Tous droits réservés.</div>
+</footer>
+
+<script data-cfasync="false" src="/cdn-cgi/scripts/5c5dd728/cloudflare-static/email-decode.min.js"></script><script>
+// Scroll animations
+const observer = new IntersectionObserver((entries) => {
+  entries.forEach((entry, i) => {
+    if (entry.isIntersecting) {
+      setTimeou
